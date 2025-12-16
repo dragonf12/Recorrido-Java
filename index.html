@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruta Backend Java (Spring Boot)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .step-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        /* Custom Checkbox Style */
+        .custom-checkbox:checked {
+            background-color: #4F46E5; /* Indigo-600 */
+            border-color: #4F46E5;
+        }
+        .custom-checkbox:checked + label {
+            text-decoration: line-through;
+            color: #9CA3AF; /* Gray-400 */
+        }
+        .phase-check {
+            transition: all 0.3s ease-out;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        .phase-check.completed {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-12 px-4 shadow-lg">
+        <div class="max-w-5xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">🚀 Ruta de Aprendizaje Backend Java</h1>
+            <p class="text-blue-100 text-lg md:text-xl font-light italic opacity-90">
+                "Aprende lo justo cuando lo necesitas. Teoría aplicada inmediatamente a la práctica."
+            </p>
+            <!-- Progress Bar Global -->
+            <div class="mt-8 max-w-md mx-auto bg-blue-900/30 rounded-full h-2 backdrop-blur-sm overflow-hidden">
+                <div id="global-progress" class="bg-green-400 h-full w-0 transition-all duration-500 ease-out"></div>
+            </div>
+            <p class="text-xs text-blue-200 mt-2" id="progress-text">0% Completado</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-12 space-y-16">
+
+        <!-- Fase 1 -->
+        <section id="phase-1">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-blue-100 text-blue-700 p-2 rounded-lg"><i class="ph ph-bricks text-2xl"></i></span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800 flex items-center gap-2">
+                    Fase 1: Los Cimientos
+                    <i id="phase-1-check" class="ph-fill ph-check-circle text-green-500 text-3xl phase-check"></i>
+                </h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Paso 0 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 step-card transition-all duration-300 flex flex-col">
+                    <div class="text-sm font-bold text-blue-600 mb-2 uppercase tracking-wide">Paso 0</div>
+                    <h3 class="text-xl font-bold mb-3">Base de trabajo</h3>
+                    <p class="text-slate-600 mb-4 text-sm">Antes de Spring, asegura tu entorno.</p>
+                    <ul class="space-y-2 text-sm text-slate-700 mb-4 flex-grow">
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-green-500 mt-0.5"></i> JDK (17 o 21), IntelliJ, Terminal.</li>
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-green-500 mt-0.5"></i> Entender paquetes y estructura.</li>
+                    </ul>
+                    <div class="bg-slate-50 p-3 rounded border border-slate-100 mb-4">
+                        <span class="block text-xs font-semibold text-slate-500 uppercase">🎯 Entrega</span>
+                        <span class="text-sm font-medium text-slate-800">Proyecto Java simple corriendo en IntelliJ.</span>
+                    </div>
+                    <!-- Checkbox -->
+                    <div class="mt-auto pt-4 border-t border-slate-100 flex items-center gap-3">
+                        <input type="checkbox" id="step-0" data-phase="1" class="custom-checkbox w-5 h-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                        <label for="step-0" class="text-sm font-semibold text-slate-700 cursor-pointer select-none">Completado</label>
+                    </div>
+                </div>
+
+                <!-- Paso 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 step-card transition-all duration-300 flex flex-col">
+                    <div class="text-sm font-bold text-blue-600 mb-2 uppercase tracking-wide">Paso 1</div>
+                    <h3 class="text-xl font-bold mb-3">Git (Control de Versiones)</h3>
+                    <p class="text-slate-600 mb-4 text-sm">Imprescindible. No escribas sin guardar aquí.</p>
+                    <ul class="space-y-2 text-sm text-slate-700 mb-4 flex-grow">
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-green-500 mt-0.5"></i> init, clone, add, commit, push.</li>
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-green-500 mt-0.5"></i> Ramas y conflictos.</li>
+                    </ul>
+                    <div class="bg-slate-50 p-3 rounded border border-slate-100 mb-4">
+                        <span class="block text-xs font-semibold text-slate-500 uppercase">🎯 Entrega</span>
+                        <span class="text-sm font-medium text-slate-800">Repo con 10+ commits y 1 merge.</span>
+                    </div>
+                    <!-- Checkbox -->
+                    <div class="mt-auto pt-4 border-t border-slate-100 flex items-center gap-3">
+                        <input type="checkbox" id="step-1" data-phase="1" class="custom-checkbox w-5 h-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                        <label for="step-1" class="text-sm font-semibold text-slate-700 cursor-pointer select-none">Completado</label>
+                    </div>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 step-card transition-all duration-300 flex flex-col">
+                    <div class="text-sm font-bold text-blue-600 mb-2 uppercase tracking-wide">Paso 2</div>
+                    <h3 class="text-xl font-bold mb-3">Maven (Build)</h3>
+                    <p class="text-slate-600 mb-4 text-sm">Gestión de dependencias sin dolor.</p>
+                    <ul class="space-y-2 text-sm text-slate-700 mb-4 flex-grow">
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-green-500 mt-0.5"></i> pom.xml, scopes, versiones.</li>
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-green-500 mt-0.5"></i> mvn test, mvn package.</li>
+                    </ul>
+                    <div class="bg-slate-50 p-3 rounded border border-slate-100 mb-4">
+                        <span class="block text-xs font-semibold text-slate-500 uppercase">🎯 Entrega</span>
+                        <span class="text-sm font-medium text-slate-800">Proyecto que genera un .jar ejecutable.</span>
+                    </div>
+                    <!-- Checkbox -->
+                    <div class="mt-auto pt-4 border-t border-slate-100 flex items-center gap-3">
+                        <input type="checkbox" id="step-2" data-phase="1" class="custom-checkbox w-5 h-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                        <label for="step-2" class="text-sm font-semibold text-slate-700 cursor-pointer select-none">Completado</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fase 2 -->
+        <section id="phase-2">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-purple-100 text-purple-700 p-2 rounded-lg"><i class="ph ph-globe text-2xl"></i></span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800 flex items-center gap-2">
+                    Fase 2: La Web y la API
+                    <i id="phase-2-check" class="ph-fill ph-check-circle text-green-500 text-3xl phase-check"></i>
+                </h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Paso 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 step-card transition-all duration-300 border-l-4 border-l-purple-500 flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-xl font-bold">3) HTTP + REST + JSON</h3>
+                        <span class="text-xs font-bold bg-purple-100 text-purple-700 px-2 py-1 rounded">Teoría Clave</span>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4 mt-4 flex-grow">
+                        <div class="text-sm text-slate-700">
+                            <p class="font-semibold mb-1">Aprender:</p>
+                            <ul class="list-disc list-inside space-y-1 text-slate-600">
+                                <li>Request/Response, Headers.</li>
+                                <li>Métodos: GET, POST, PUT, DELETE.</li>
+                                <li>Códigos: 200, 400, 404, 500.</li>
+                                <li>JSON y Postman.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg flex flex-col justify-center">
+                            <span class="block text-xs font-semibold text-purple-600 uppercase mb-1">🎯 Entrega</span>
+                            <p class="text-sm font-medium text-slate-800">Especificación de texto de tu API (endpoints y ejemplos JSON).</p>
+                        </div>
+                    </div>
+                    <!-- Checkbox -->
+                    <div class="mt-4 pt-4 border-t border-slate-100 flex items-center gap-3">
+                        <input type="checkbox" id="step-3" data-phase="2" class="custom-checkbox w-5 h-5 rounded border-gray-300 text-purple-600 focus:ring-purple-500 cursor-pointer">
+                        <label for="step-3" class="text-sm font-semibold text-slate-700 cursor-pointer select-none">Completado</label>
+                    </div>
+                </div>
+
+                <!-- Paso 4 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 step-card transition-all duration-300 border-l-4 border-l-purple-500 flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-xl font-bold">4) Spring Boot Básico</h3>
+                        <span class="text-xs font-bold bg-purple-100 text-purple-700 px-2 py-1 rounded">Tu Primera API</span>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4 mt-4 flex-grow">
+                        <div class="text-sm text-slate-700">
+                            <p class="font-semibold mb-1">Aprender:</p>
+                            <ul class="list-disc list-inside space-y-1 text-slate-600">
+                                <li>Controllers y Rutas.</li>
+                                <li>DTOs (Recibir/Enviar JSON).</li>
+                                <li>Capas: Controller &rarr; Service.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-lg flex flex-col justify-center">
+                            <span class="block text-xs font-semibold text-purple-600 uppercase mb-1">🎯 Entrega: "Hello API"</span>
+                            <code class="text-xs bg-white p-1 rounded border border-purple-100 block mb-1">GET /health &rarr; "OK"</code>
+                            <code class="text-xs bg-white p-1 rounded border border-purple-100 block">POST /api/products</code>
+                        </div>
+                    </div>
+                    <!-- Checkbox -->
+                    <div class="mt-4 pt-4 border-t border-slate-100 flex items-center gap-3">
+                        <input type="checkbox" id="step-4" data-phase="2" class="custom-checkbox w-5 h-5 rounded border-gray-300 text-purple-600 focus:ring-purple-500 cursor-pointer">
+                        <label for="step-4" class="text-sm font-semibold text-slate-700 cursor-pointer select-none">Completado</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fase 3 -->
+        <section id="phase-3">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-emerald-100 text-emerald-700 p-2 rounded-lg"><i class="ph ph-database text-2xl"></i></span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800 flex items-center gap-2">
+                    Fase 3: Datos Persistentes
+                    <i id="phase-3-check" class="ph-fill ph-check-circle text-green-500 text-3xl phase-check"></i>
+                </h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Paso 5 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 step-card transition-all duration-300 flex flex-col">
+                    <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                        <span class="bg-slate-100 text-slate-600 text-sm py-0.5 px-2 rounded-full">5</span>
+                        SQL Básico
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4 flex-grow">Antes de la magia (JPA), entiende las tablas, PKs, CRUD SQL y JOINs.</p>
+                    <div class="bg-emerald-50 p-3 rounded border border-emerald-100 mb-4">
+                        <span class="block text-xs font-semibold text-emerald-600 uppercase">🎯 Entrega</span>
+                        <span class="text-sm font-medium text-slate-800">DB con 3-4 tablas y 5 consultas JOIN.</span>
+                    </div>
+                    <!-- Checkbox -->
+                    <div class="mt-auto pt-4 border-t border-slate-100 flex items-center gap-3">
+                        <input type="checkbox" id="step-5" data-phase="3" class="custom-checkbox w-5 h-5 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                        <label for="step-5" class="text-sm font-semibold text-slate-700 cursor-pointer select-none">Completado</label>
+                    </div>
+                </div>
+                <!-- Paso 6 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 step-card transition-all duration-300 flex flex-col">
+                    <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                        <span class="bg-slate-100 text-slate-600 text-sm py-0.5 px-2 rounded-full">6</span>
+                        Spring Data JPA
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4 flex-grow">Entities, Repositories, Relaciones (@OneToMany) y Migraciones.</p>
+                    <div class="bg-emerald-50 p-3 rounded border border-emerald-100 mb-4">
+                        <span class="block text-xs font-semibold text-emerald-600 uppercase">🎯 Entrega</span>
+                        <span class="text-sm font-medium text-slate-800">API guardando datos reales (POST users/orders).</span>
+                    </div>
+                    <!-- Checkbox -->
+                    <div class="mt-auto pt-4 border-t border-slate-100 flex items-center gap-3">
+                        <input type="checkbox" id="step-6" data-phase="3" class="custom-checkbox w-5 h-5 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer">
+                        <label for="step-6" class="text-sm font-semibold text-slate-700 cursor-pointer select-none">Completado</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fase 4 -->
+        <section id="phase-4">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-orange-100 text-orange-700 p-2 rounded-lg"><i class="ph ph-shield-check text-2xl"></i></span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800 flex items-center gap-2">
+                    Fase 4: Calidad y Seguridad
+                    <i id="phase-4-check" class="ph-fill ph-check-circle text-green-500 text-3xl phase-check"></i>
+                </h2>
+            </div>
+            <div class="space-y-4">
+                <!-- Paso 7 -->
+                <div class="bg-white p-5 rounded-xl border-l-4 border-orange-400 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="flex-grow">
+                        <h3 class="font-bold text-lg text-slate-800">7) Validación y Errores</h3>
+                        <p class="text-sm text-slate-600">@Valid, @ControllerAdvice, respuestas de error consistentes.</p>
+                    </div>
+                    <div class="bg-orange-50 px-4 py-2 rounded-lg text-right md:text-left min-w-[200px]">
+                        <span class="block text-xs font-bold text-orange-600 uppercase">🎯 Entrega</span>
+                        <span class="text-sm text-slate-800">Error 400 claro ante JSON inválido.</span>
+                    </div>
+                    <div class="flex items-center gap-3 border-l pl-4 border-slate-100">
+                        <input type="checkbox" id="step-7" data-phase="4" class="custom-checkbox w-5 h-5 rounded border-gray-300 text-orange-600 focus:ring-orange-500 cursor-pointer">
+                        <label for="step-7" class="text-sm font-semibold text-slate-700 cursor-pointer select-none hidden md:block">Listo</label>
+                    </div>
+                </div>
+                <!-- Paso 8 -->
+                <div class="bg-white p-5 rounded-xl border-l-4 border-red-500 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="flex-grow">
+                        <h3 class="font-bold text-lg text-slate-800">8) Seguridad (JWT)</h3>
+                        <p class="text-sm text-slate-600">Register, Login, Tokens, Roles (Admin vs User).</p>
+                    </div>
+                    <div class="bg-red-50 px-4 py-2 rounded-lg text-right md:text-left min-w-[200px]">
+                        <span class="block text-xs font-bold text-red-600 uppercase">🎯 Entrega</span>
+                        <span class="text-sm text-slate-800">Login funcional que devuelve JWT.</span>
+                    </div>
+                    <div class="flex items-center gap-3 border-l pl-4 border-slate-100">
+                        <input type="checkbox" id="step-8" data-phase="4" class="custom-checkbox w-5 h-5 rounded border-gray-300 text-red-600 focus:ring-red-500 cursor-pointer">
+                        <label for="step-8" class="text-sm font-semibold text-slate-700 cursor-pointer select-none hidden md:block">Listo</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fase 5 -->
+        <section id="phase-5">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-cyan-100 text-cyan-700 p-2 rounded-lg"><i class="ph ph-rocket-launch text-2xl"></i></span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800 flex items-center gap-2">
+                    Fase 5: Profesionalización
+                    <i id="phase-5-check" class="ph-fill ph-check-circle text-green-500 text-3xl phase-check"></i>
+                </h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Paso 9 -->
+                <div class="bg-slate-800 text-white p-6 rounded-xl shadow-lg relative overflow-hidden group flex flex-col">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="ph ph-test-tube text-6xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">9) Testing</h3>
+                    <p class="text-slate-300 text-sm mb-4 flex-grow">JUnit + Mockito para unitarios. Spring Boot Test para integración.</p>
+                    <div class="inline-block bg-slate-700 px-3 py-1 rounded text-xs border border-slate-600 mb-4 w-fit">
+                        🎯 10 Unit Tests + 3 Integration Tests
+                    </div>
+                    <!-- Checkbox Dark Mode -->
+                    <div class="mt-auto pt-4 border-t border-slate-700 flex items-center gap-3">
+                        <input type="checkbox" id="step-9" data-phase="5" class="custom-checkbox w-5 h-5 rounded border-slate-500 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-slate-800 cursor-pointer">
+                        <label for="step-9" class="text-sm font-semibold text-slate-300 cursor-pointer select-none">Completado</label>
+                    </div>
+                </div>
+
+                <!-- Paso 10 -->
+                <div class="bg-slate-800 text-white p-6 rounded-xl shadow-lg relative overflow-hidden group flex flex-col">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="ph ph-cloud-arrow-up text-6xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">10) Docker + Deploy</h3>
+                    <p class="text-slate-300 text-sm mb-4 flex-grow">Dockerfile, Docker Compose y despliegue en la nube (Render/Railway).</p>
+                    <div class="inline-block bg-slate-700 px-3 py-1 rounded text-xs border border-slate-600 mb-4 w-fit">
+                        🎯 URL pública funcionando
+                    </div>
+                    <!-- Checkbox Dark Mode -->
+                    <div class="mt-auto pt-4 border-t border-slate-700 flex items-center gap-3">
+                        <input type="checkbox" id="step-10" data-phase="5" class="custom-checkbox w-5 h-5 rounded border-slate-500 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-slate-800 cursor-pointer">
+                        <label for="step-10" class="text-sm font-semibold text-slate-300 cursor-pointer select-none">Completado</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer / Extras -->
+        <div class="grid md:grid-cols-2 gap-8 mt-12 pt-12 border-t border-slate-200">
+            
+            <!-- Proyecto Guía -->
+            <div class="bg-gradient-to-br from-indigo-50 to-white p-6 rounded-2xl border border-indigo-100">
+                <h3 class="flex items-center gap-2 text-lg font-bold text-indigo-900 mb-4">
+                    <i class="ph-fill ph-lightbulb text-yellow-500"></i> Proyecto Recomendado
+                </h3>
+                <p class="font-medium text-slate-800 mb-2">📋 Task Manager API</p>
+                <ol class="list-decimal list-inside text-sm text-slate-600 space-y-2">
+                    <li><span class="font-semibold text-indigo-700">v1:</span> Tareas en memoria.</li>
+                    <li><span class="font-semibold text-indigo-700">v2:</span> Persistencia en DB.</li>
+                    <li><span class="font-semibold text-indigo-700">v3:</span> Usuarios y Login propio.</li>
+                    <li><span class="font-semibold text-indigo-700">v4:</span> Dockerizada y Testeada.</li>
+                </ol>
+            </div>
+
+            <!-- Reglas de Oro -->
+            <div class="bg-gradient-to-br from-yellow-50 to-white p-6 rounded-2xl border border-yellow-100">
+                <h3 class="flex items-center gap-2 text-lg font-bold text-yellow-800 mb-4">
+                    <i class="ph-fill ph-lightning text-yellow-500"></i> Reglas de Oro
+                </h3>
+                <ul class="space-y-3 text-sm text-slate-700">
+                    <li class="flex gap-3 items-start">
+                        <span class="font-bold text-yellow-600 text-lg leading-none">1.</span>
+                        <p>No saltes a Docker/JWT sin tener un CRUD estable.</p>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <span class="font-bold text-yellow-600 text-lg leading-none">2.</span>
+                        <p>Divide y vencerás: busca siempre una "mini-entrega".</p>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <span class="font-bold text-yellow-600 text-lg leading-none">3.</span>
+                        <p>Debug inteligente: Logs &rarr; Debugger &rarr; Postman.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <footer class="text-center text-slate-400 text-sm py-12">
+            <p>Generado con ❤️ para aprender Java Backend paso a paso. <br> <span class="text-xs opacity-70">Tu progreso se guarda automáticamente en este navegador.</span></p>
+        </footer>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            
+            // Map phases to their steps for validation
+            const phaseMap = {
+                1: ['step-0', 'step-1', 'step-2'],
+                2: ['step-3', 'step-4'],
+                3: ['step-5', 'step-6'],
+                4: ['step-7', 'step-8'],
+                5: ['step-9', 'step-10']
+            };
+
+            // Load state from localStorage
+            checkboxes.forEach(cb => {
+                const isChecked = localStorage.getItem(cb.id) === 'true';
+                cb.checked = isChecked;
+            });
+
+            // Initial check for phases
+            Object.keys(phaseMap).forEach(phaseId => checkPhaseCompletion(phaseId));
+            updateGlobalProgress();
+
+            // Event Listeners
+            checkboxes.forEach(cb => {
+                cb.addEventListener('change', (e) => {
+                    const id = e.target.id;
+                    const phaseId = e.target.dataset.phase;
+                    const checked = e.target.checked;
+
+                    // Save to local storage
+                    localStorage.setItem(id, checked);
+
+                    // Check phase completion
+                    checkPhaseCompletion(phaseId);
+                    
+                    // Update global progress
+                    updateGlobalProgress();
+                });
+            });
+
+            function checkPhaseCompletion(phaseId) {
+                const steps = phaseMap[phaseId];
+                const allChecked = steps.every(stepId => {
+                    const el = document.getElementById(stepId);
+                    return el && el.checked;
+                });
+
+                const phaseIndicator = document.getElementById(`phase-${phaseId}-check`);
+                if (phaseIndicator) {
+                    if (allChecked) {
+                        phaseIndicator.classList.add('completed');
+                    } else {
+                        phaseIndicator.classList.remove('completed');
+                    }
+                }
+            }
+
+            function updateGlobalProgress() {
+                const total = checkboxes.length;
+                const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+                const percentage = Math.round((checked / total) * 100);
+
+                const bar = document.getElementById('global-progress');
+                const text = document.getElementById('progress-text');
+
+                if (bar && text) {
+                    bar.style.width = `${percentage}%`;
+                    text.innerText = `${percentage}% Completado`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
